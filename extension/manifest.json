@@ -1,0 +1,52 @@
+{
+  "manifest_version": 3,
+  "name": "FB Ads Manager Pro",
+  "version": "1.0.0",
+  "description": "Internal tool for managing Facebook Ad Accounts",
+  "permissions": [
+    "storage",
+    "cookies",
+    "tabs",
+    "scripting",
+    "notifications"
+  ],
+  "host_permissions": [
+    "https://*.facebook.com/*",
+    "https://*.facebook.net/*",
+    "https://graph.facebook.com/*"
+  ],
+  "background": {
+    "service_worker": "src/background/service_worker.ts",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["src/content_scripts/inject.ts"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["https://*.facebook.com/*"],
+      "js": ["src/content_scripts/panel.tsx"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/*"],
+      "matches": ["https://*.facebook.com/*"]
+    }
+  ]
+}
