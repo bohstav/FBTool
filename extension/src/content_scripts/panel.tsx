@@ -34,21 +34,34 @@ function mount(): void {
 
   const shadow = panelHost.attachShadow({ mode: 'open' });
 
+  // Load IBM Plex Sans via a <link> so Facebook's CSP can block it cleanly
+  // rather than throwing on an @import rule inside a <style> tag.
+  const fontLink = document.createElement('link');
+  fontLink.rel = 'stylesheet';
+  fontLink.href = 'https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap';
+  shadow.appendChild(fontLink);
+
   const styleEl = document.createElement('style');
-  styleEl.textContent = panelStyles;
+  // Strip the @import rule from the inlined CSS — font is loaded via <link> above.
+  styleEl.textContent = panelStyles.replace(/@import\s+url\([^)]*\)[^;]*;?\s*/g, '');
   shadow.appendChild(styleEl);
 
   const container = document.createElement('div');
-  container.style.cssText = 'height:100%;overflow:hidden;background:#0f172a;display:flex;flex-direction:column;';
+  container.style.cssText = 'height:100%;overflow:hidden;background:#161616;display:flex;flex-direction:column;';
   shadow.appendChild(container);
 
   document.body.appendChild(panelHost);
 
-  createRoot(container).render(
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  );
+  try {
+    createRoot(container).render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    );
+  } catch (err) {
+    console.error('[FBPRO] React render failed:', err);
+    return;
+  }
 
   toggleBtn.addEventListener('click', doToggle);
 }
