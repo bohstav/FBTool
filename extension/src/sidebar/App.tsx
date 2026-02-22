@@ -7,13 +7,12 @@ import { Tools } from '../pages/Tools';
 import { Settings } from '../pages/Settings';
 import { useStore } from '../store';
 import { sendMessage } from '../lib/utils';
-import { CheckCircle, Info, XCircle, X } from 'lucide-react';
+import { CheckCircle, AlertCircle, Info, X } from 'lucide-react';
 import type { AppSettings } from '../lib/types';
 
 export function App() {
   const { activeTab, toast, clearToast } = useStore();
 
-  // Load settings on mount (with retry — service worker may be sleeping)
   useEffect(() => {
     sendMessage<{ settings?: AppSettings }>({ type: 'GET_SETTINGS' })
       .then((res) => {
@@ -24,14 +23,17 @@ export function App() {
 
   return (
     <div className="flex flex-col h-full bg-surface overflow-hidden" style={{ minHeight: '100vh' }}>
-      {/* Header */}
-      <header className="flex items-center px-3 py-2 border-b border-slate-800 shrink-0">
-        <div className="flex items-center gap-1.5">
-          <div className="w-5 h-5 rounded bg-brand flex items-center justify-center text-white font-bold text-xs">
-            F
-          </div>
-          <span className="text-sm font-semibold text-slate-200">Ads Manager Pro</span>
+      {/* Carbon global header */}
+      <header className="flex items-center justify-between px-4 h-10 bg-slate-900 border-b border-slate-800 shrink-0">
+        <div className="flex items-center gap-2.5">
+          <span className="text-brand font-bold text-base leading-none">▣</span>
+          <span className="text-sm font-semibold text-slate-100 tracking-tight">
+            Ads Manager Pro
+          </span>
         </div>
+        <span className="text-[9px] font-semibold text-brand border border-brand/50 px-1.5 py-px uppercase tracking-widest">
+          PRO
+        </span>
       </header>
 
       {/* Navigation */}
@@ -66,23 +68,28 @@ export function App() {
         )}
       </main>
 
-      {/* Toast */}
+      {/* Carbon toast notification — anchored to bottom, full width, left accent border */}
       {toast && (
         <div
-          className={`fixed bottom-4 left-3 right-3 flex items-center gap-2 p-3 rounded-lg border text-sm shadow-lg z-50 ${
+          className={`fixed bottom-0 left-0 right-0 flex items-start gap-3 px-4 py-3.5 text-sm z-50 border-l-4 shadow-lg ${
             toast.type === 'success'
-              ? 'bg-emerald-950 border-emerald-800 text-emerald-300'
+              ? 'bg-slate-900 border-l-emerald-400 text-slate-200'
               : toast.type === 'error'
-                ? 'bg-red-950 border-red-800 text-red-300'
-                : 'bg-slate-800 border-slate-700 text-slate-300'
+                ? 'bg-slate-900 border-l-red-400 text-slate-200'
+                : 'bg-slate-900 border-l-brand text-slate-200'
           }`}
         >
-          {toast.type === 'success' && <CheckCircle className="w-4 h-4 shrink-0" />}
-          {toast.type === 'error' && <XCircle className="w-4 h-4 shrink-0" />}
-          {toast.type === 'info' && <Info className="w-4 h-4 shrink-0" />}
-          <span className="flex-1">{toast.message}</span>
-          <button onClick={clearToast} className="opacity-60 hover:opacity-100">
-            <X className="w-3.5 h-3.5" />
+          <span className="shrink-0 mt-px">
+            {toast.type === 'success' && <CheckCircle className="w-4 h-4 text-emerald-400" />}
+            {toast.type === 'error' && <AlertCircle className="w-4 h-4 text-red-400" />}
+            {toast.type === 'info' && <Info className="w-4 h-4 text-brand" />}
+          </span>
+          <span className="flex-1 leading-snug">{toast.message}</span>
+          <button
+            onClick={clearToast}
+            className="shrink-0 text-slate-500 hover:text-slate-300 transition-colors mt-px"
+          >
+            <X className="w-4 h-4" />
           </button>
         </div>
       )}

@@ -89,7 +89,7 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
   }) {
     return (
       <th
-        className={`px-2 py-2 text-left text-[10px] font-medium text-slate-500 uppercase tracking-wider whitespace-nowrap ${col ? 'cursor-pointer select-none hover:text-slate-300' : ''} ${className}`}
+        className={`px-3 py-2.5 text-left text-[10px] font-semibold text-slate-400 uppercase tracking-wider whitespace-nowrap ${col ? 'cursor-pointer select-none hover:text-slate-200 hover:bg-slate-800' : ''} ${className}`}
         onClick={col ? () => toggleSort(col) : undefined}
       >
         <span className="flex items-center gap-1">
@@ -111,7 +111,7 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-xs border-collapse">
-        <thead className="sticky top-0 bg-surface z-10">
+        <thead className="sticky top-0 bg-slate-900 z-10">
           <tr className="border-b border-slate-800">
             <th className="w-8 px-2 py-2">
               <input
@@ -159,11 +159,11 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
             return (
               <tr
                 key={account.id}
-                className={`border-b border-slate-800/50 transition-colors ${
-                  isSelected ? 'bg-brand/5' : 'hover:bg-surface-raised'
+                className={`border-b border-slate-800 transition-colors ${
+                  isSelected ? 'bg-brand/10' : 'hover:bg-slate-900'
                 }`}
               >
-                <td className="px-2 py-2">
+                <td className="px-3 py-2">
                   <input
                     type="checkbox"
                     checked={isSelected}
@@ -229,7 +229,7 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
                   </div>
                 </td>
 
-                <td className="px-2 py-2">
+                <td className="px-3 py-2">
                   <StatusBadge status={account.account_status} />
                 </td>
 
@@ -300,7 +300,7 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
                 )}
 
                 {insights && (
-                  <td className="px-2 py-2">
+                  <td className="px-3 py-2">
                     {runwayDays !== null ? (
                       <span
                         className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium ${
@@ -346,7 +346,7 @@ export function AccountTable({ accounts, onRename, insights }: AccountTableProps
                     : '—'}
                 </td>
 
-                <td className="px-2 py-2">
+                <td className="px-3 py-2">
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => copyToClipboard(stripActPrefix(account.id))}

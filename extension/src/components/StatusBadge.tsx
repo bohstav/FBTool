@@ -1,23 +1,15 @@
 import React from 'react';
 import { AccountStatus, ACCOUNT_STATUS_LABELS } from '../lib/types';
 
-const STATUS_STYLES: Record<number, string> = {
-  [AccountStatus.ACTIVE]:
-    'bg-emerald-950 text-emerald-400 border-emerald-800',
-  [AccountStatus.DISABLED]:
-    'bg-red-950 text-red-400 border-red-800',
-  [AccountStatus.UNSETTLED]:
-    'bg-yellow-950 text-yellow-400 border-yellow-800',
-  [AccountStatus.PENDING_RISK_REVIEW]:
-    'bg-orange-950 text-orange-400 border-orange-800',
-  [AccountStatus.PENDING_SETTLEMENT]:
-    'bg-blue-950 text-blue-400 border-blue-800',
-  [AccountStatus.IN_GRACE_PERIOD]:
-    'bg-purple-950 text-purple-400 border-purple-800',
-  [AccountStatus.PENDING_CLOSURE]:
-    'bg-slate-800 text-slate-400 border-slate-700',
-  [AccountStatus.CLOSED]:
-    'bg-slate-900 text-slate-500 border-slate-800',
+const STATUS_COLORS: Record<number, { dot: string; label: string }> = {
+  [AccountStatus.ACTIVE]:              { dot: 'bg-emerald-400',  label: 'text-slate-300' },
+  [AccountStatus.DISABLED]:            { dot: 'bg-red-400',      label: 'text-slate-500' },
+  [AccountStatus.UNSETTLED]:           { dot: 'bg-yellow-400',   label: 'text-slate-400' },
+  [AccountStatus.PENDING_RISK_REVIEW]: { dot: 'bg-orange-400',   label: 'text-slate-400' },
+  [AccountStatus.PENDING_SETTLEMENT]:  { dot: 'bg-blue-400',     label: 'text-slate-400' },
+  [AccountStatus.IN_GRACE_PERIOD]:     { dot: 'bg-purple-400',   label: 'text-slate-400' },
+  [AccountStatus.PENDING_CLOSURE]:     { dot: 'bg-slate-500',    label: 'text-slate-500' },
+  [AccountStatus.CLOSED]:              { dot: 'bg-slate-700',    label: 'text-slate-600' },
 };
 
 interface StatusBadgeProps {
@@ -26,14 +18,13 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status, className = '' }: StatusBadgeProps) {
-  const label = ACCOUNT_STATUS_LABELS[status] ?? 'Unknown';
-  const style = STATUS_STYLES[status] ?? 'bg-slate-800 text-slate-400 border-slate-700';
+  const label  = ACCOUNT_STATUS_LABELS[status] ?? 'Unknown';
+  const colors = STATUS_COLORS[status] ?? { dot: 'bg-slate-600', label: 'text-slate-500' };
 
   return (
-    <span
-      className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium border whitespace-nowrap ${style} ${className}`}
-    >
-      {label}
+    <span className={`inline-flex items-center gap-1.5 whitespace-nowrap ${className}`}>
+      <span className={`w-2 h-2 rounded-full shrink-0 ${colors.dot}`} />
+      <span className={`text-xs ${colors.label}`}>{label}</span>
     </span>
   );
 }

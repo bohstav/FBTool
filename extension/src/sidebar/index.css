@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,7 @@
 * {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 html,
@@ -14,35 +17,69 @@ body,
   width: 100%;
   margin: 0;
   padding: 0;
-  background-color: #0f172a;
-  color: #f1f5f9;
+  background-color: #161616;
+  color: #f4f4f4;
+  font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+  font-size: 14px;
 }
 
-/* Custom scrollbar */
+/* Carbon scrollbar — thin, no rounded corners */
 ::-webkit-scrollbar {
   width: 4px;
   height: 4px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 2px;
+  background: #525252;
+  border-radius: 0;
 }
-
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #6f6f6f;
 }
 
-/* Checkbox styling */
+/* Checkbox */
 input[type='checkbox'] {
   accent-color: #00b894;
 }
 
-/* Select element in dark mode */
+/* Select options */
 select option {
-  background-color: #1e293b;
+  background-color: #262626;
+  color: #f4f4f4;
+}
+
+/* Carbon search / input — bottom border only variant */
+.cds-search {
+  background: #262626;
+  border: none;
+  border-bottom: 1px solid #525252;
+  border-radius: 0;
+  outline: none;
+  color: #f4f4f4;
+  width: 100%;
+  padding: 6px 36px 6px 40px;
+  font-family: inherit;
+  font-size: 14px;
+}
+.cds-search:focus {
+  border-bottom: 2px solid #00b894;
+  outline: 2px solid #00b89440;
+  outline-offset: 0;
+}
+.cds-search::placeholder {
+  color: #6f6f6f;
+}
+
+/* Carbon tag */
+.cds-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 2px;
+  letter-spacing: 0.01em;
 }

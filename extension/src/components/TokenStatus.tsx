@@ -44,10 +44,10 @@ export function TokenStatus() {
 
   if (!tokenData) {
     return (
-      <div className="flex items-start gap-3 p-3 rounded-lg bg-surface-raised border border-slate-700">
-        <XCircle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
+      <div className="flex items-start gap-3 p-3 bg-slate-900 border-l-4 border-l-slate-600">
+        <XCircle className="w-4 h-4 text-slate-500 mt-0.5 shrink-0" />
         <div className="flex-1 min-w-0">
-          <p className="text-sm font-medium text-slate-200">No token captured</p>
+          <p className="text-sm font-medium text-slate-300">No token captured</p>
           <p className="text-xs text-slate-500 mt-0.5">
             Navigate to any{' '}
             <span className="text-brand">facebook.com</span> page to auto-capture your token.
@@ -59,7 +59,7 @@ export function TokenStatus() {
 
   if (isExpired) {
     return (
-      <div className="flex items-start gap-3 p-3 rounded-lg bg-surface-raised border border-red-800">
+      <div className="flex items-start gap-3 p-3 bg-slate-900 border-l-4 border-l-red-400">
         <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-red-400">Token expired</p>
@@ -71,11 +71,11 @@ export function TokenStatus() {
     );
   }
 
-  const statusColor = isStale ? 'text-yellow-400' : 'text-brand';
-  const borderColor = isStale ? 'border-yellow-800' : 'border-brand/30';
+  const accentBorder = isStale ? 'border-l-yellow-400' : 'border-l-brand';
+  const statusColor  = isStale ? 'text-yellow-400' : 'text-brand';
 
   return (
-    <div className={`p-3 rounded-lg bg-surface-raised border ${borderColor}`}>
+    <div className={`p-3 bg-slate-900 border-l-4 ${accentBorder}`}>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-2">
           <CheckCircle className={`w-4 h-4 ${statusColor} shrink-0`} />
@@ -130,8 +130,8 @@ export function TokenStatus() {
       </p>
 
       {showToken && (
-        <div className="mt-2 p-2 rounded bg-surface-overlay">
-          <p className="text-xs font-mono text-slate-300 break-all select-all">
+        <div className="mt-2 p-2 bg-slate-800 border-l-2 border-l-slate-600">
+          <p className="text-xs font-mono text-slate-300 break-all select-all leading-relaxed">
             {tokenData.token}
           </p>
         </div>

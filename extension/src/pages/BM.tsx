@@ -59,7 +59,7 @@ export function BM() {
         {businessManagers.map((bm) => (
           <div
             key={bm.id}
-            className="p-3 rounded-lg bg-surface-raised border border-slate-800 hover:border-slate-700 transition-colors"
+            className="p-3 bg-slate-900 border-l-4 border-l-slate-700 hover:border-l-brand border-b border-slate-800 transition-colors"
           >
             <div className="flex items-start justify-between gap-2 mb-2">
               <div className="flex-1 min-w-0">
@@ -113,7 +113,7 @@ export function BM() {
             </div>
 
             {(bm.hidden_admins ?? 0) > 0 && (
-              <div className="mt-2 p-2 rounded bg-orange-950/30 border border-orange-900 text-xs text-orange-400">
+              <div className="mt-2 p-2 bg-orange-950/40 border-l-2 border-l-orange-400 text-xs text-orange-400">
                 ⚠ {bm.hidden_admins} hidden admin(s) detected — system users not visible as regular members.
               </div>
             )}

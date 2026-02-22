@@ -89,8 +89,8 @@ export function Dashboard() {
 
       {/* Current account card */}
       {currentAccount && (
-        <div className="rounded-lg border border-brand/30 bg-brand/5 overflow-hidden">
-          <div className="px-3 py-2 border-b border-brand/20 flex items-center justify-between">
+        <div className="border-l-4 border-l-brand bg-slate-900 overflow-hidden">
+          <div className="px-3 py-2 border-b border-slate-800 flex items-center justify-between">
             <span className="text-[10px] font-semibold text-brand uppercase tracking-wider">
               Current Account
             </span>
@@ -227,28 +227,28 @@ export function Dashboard() {
           label="Active"
           value={loading ? '…' : String(stats.active)}
           accent="text-emerald-400"
-          bg="bg-emerald-950/30"
-          border="border-emerald-900"
+          bg="bg-slate-900"
+          border="border-t-emerald-400"
         />
         <StatCard
           label="Disabled"
           value={loading ? '…' : String(stats.disabled)}
           accent="text-red-400"
-          bg="bg-red-950/30"
-          border="border-red-900"
+          bg="bg-slate-900"
+          border="border-t-red-400"
         />
         <StatCard
           label="Flagged"
           value={loading ? '…' : String(stats.flagged)}
           accent="text-orange-400"
-          bg="bg-orange-950/30"
-          border="border-orange-900"
+          bg="bg-slate-900"
+          border="border-t-orange-400"
         />
       </div>
 
       {/* Portfolio Health */}
       {!loading && stats.total > 0 && (
-        <div className="p-2.5 rounded-lg bg-surface-raised border border-slate-800">
+        <div className="p-2.5 bg-slate-900 border-t-2 border-t-brand">
           <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider mb-1.5">
             Portfolio Health
           </p>
@@ -276,7 +276,7 @@ export function Dashboard() {
           {Object.entries(stats.byCurrency).map(([currency, { balance, spent, velocity7d }]) => (
             <div
               key={currency}
-              className="flex items-center justify-between p-2.5 rounded-lg bg-surface-raised border border-slate-800"
+              className="flex items-center justify-between p-2.5 bg-slate-900 border-b border-slate-800"
             >
               <div className="flex items-center gap-2">
                 <CreditCard className="w-3.5 h-3.5 text-slate-600" />
@@ -359,9 +359,9 @@ function StatCard({
   border: string;
 }) {
   return (
-    <div className={`p-2.5 rounded-lg ${bg} border ${border}`}>
-      <p className={`text-lg font-bold ${accent}`}>{value}</p>
-      <p className="text-[10px] text-slate-500 mt-0.5">{label}</p>
+    <div className={`p-3 ${bg} border-t-2 ${border}`}>
+      <p className={`text-xl font-semibold ${accent} leading-none`}>{value}</p>
+      <p className="text-[10px] text-slate-500 mt-1.5 uppercase tracking-wide">{label}</p>
     </div>
   );
 }
@@ -378,7 +378,7 @@ function InfoTile({
   highlight?: boolean;
 }) {
   return (
-    <div className="p-2 rounded bg-surface-overlay border border-slate-800">
+    <div className="p-2 bg-slate-800">
       <div className="flex items-center gap-1 text-slate-500 mb-0.5">
         {icon}
         <span className="text-[9px] uppercase tracking-wider">{label}</span>
